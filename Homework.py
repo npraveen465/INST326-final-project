@@ -18,3 +18,6 @@ class Homework():
             self.number /= 0
         else:
             raise ValueError("Can't divide by zero.")
+            
+    def power(self, exponent):
+        self.number **= exponent
