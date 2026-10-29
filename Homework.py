@@ -4,6 +4,9 @@ class Homework():
         self.number = number
     
     
-    def add_3(number):
-        number += 5
+    def add_3(self, number):
+        self.number += 5
+
+    def multi(self, number)
+        self.number *= number
     
