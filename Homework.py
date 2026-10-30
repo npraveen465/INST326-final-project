@@ -21,3 +21,8 @@ class Homework():
             
     def power(self, exponent):
         self.number **= exponent
+    
+    def floordiv(self, number):
+        if number == 0:
+            raise ValueError("Can't divide by zero.")
+        self.number //= number
