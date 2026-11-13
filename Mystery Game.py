@@ -1,4 +1,5 @@
 import random
+import copy
 
 def view_weapons_and_items(inventory):
     """ Displays the weapons and items the player is currently holding
@@ -171,3 +172,51 @@ def simulate_boss_battle(boss_stats, player_stats, inventory):
         "remaining_player_health": player_stats["health"],
         "remaining_boss_health": current_boss["health"]
     }
+    
+
+def reset_endings(player_input, player, checkpoint, endings):
+    """Handle resets and endings of the game. 
+
+    Args:
+        player_input(int): Player input for when they want to prematurely exit a scenario or option. 
+        player_stats(dict): The player's current stats ('name', 'health', 'base_attack')
+        inventory (list): The player's current inventory.
+        boss_stats (dict): Boss names assigned to their attribute dictionaries. 
+        checkpoint (dict): A saved place with the keys "player_stats", "inventory", and "boss_stats", taken before 
+            an option or at the start of the game. 
+        endings (dict): Assigns an ending name to its text. {"quit": "..."}.
+
+    Side Effects:
+        - Resets all player information back to the checkpoint.
+        - Shows ending results.
+
+    Returns:
+        None
+
+    Raises:
+        ValueError: If player_input is not 1 or 2. 
+    """
+
+    if player_input == 1:
+        player_stats.clear()
+        player_stats.update(copy.deepcopy(checkpoint["player_stats"]))
+
+        boss_stats.clear()
+        boss_stats.update(copy.deepcopy(checkpoint["boss_stats"]))
+
+        saved_inventory = copy.deepcopy(checkpoint["inventory"])
+        if isinstance(inventory, list):
+            inventory[:] = saved_inventory
+        else:
+            inventory.clear()
+            inventory.update(saved_inventory)
+
+        print(endings.get("reset", "Your progress has been reset."))
+
+    elif player_input == 2:
+        print(endings.get("quit", "You have left the adventure."))
+        print(f"Health remaining: {player_stats.get('health', 0)}")
+        print(f"Items held: {list(inventory)}")
+
+    else: 
+        raise ValueError("Invalid input. Enter 1 or 2!"
