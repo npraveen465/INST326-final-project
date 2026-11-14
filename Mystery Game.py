@@ -310,7 +310,7 @@ def story_info(choice, scene): # TODO: Implement ArgParser function
     Side Effects:
         - Show story text on the screen as a string
         - Show scenario text on the screen as a string
-        - Call item storage and effects depending on player choice
+        # TODO - Call item storage and effects depending on player choice
     Returns:
         - Nothing
     Exceptions:
