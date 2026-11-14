@@ -2,6 +2,8 @@ import random
 import copy
 
 inventory = {}
+choices = dict()
+
 def addto_inventory(inventory, options):
     """
     Generates a random list of weapons and items for player to choose one to 
