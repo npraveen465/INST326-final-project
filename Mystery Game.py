@@ -1,6 +1,85 @@
 import random
 import copy
 
+inventory = {}
+def addto_inventory(inventory, options):
+    """
+    Generates a random list of weapons and items for player to choose one to 
+    add to inventory. Always generates atleast one weapon choice
+    
+    Args: 
+        inventory(dict): A dictionary with item or weapon names as keys and
+        their quantities as values
+        
+        options(int): The number of random choices displayed to the player
+        
+    Side Effects:
+        Displays what weapons and items the player can choose from. Modifies
+        inventory dictionary by adding player choice item or weapon to said
+        dictionary and updating quantity if said choice is already present.
+        
+    Raises:
+        ValueError if player choice is a negative integer, outside of option
+        choice integer range, or not an integer
+    """
+    potential_weapons = [
+        "Great Sword",
+        "Dagger",
+        "Sword",
+        "Iron Mace",
+        "Axe",
+        "Throwing Knife",
+        "Slingshot",
+        "Bow",
+        "Long Bow",
+        "Crossbow"    
+    ]
+    
+    WEPCOUNT = len(potential_weapons)
+    
+    potential_items = [
+        "Health Potion",
+        "Lamp",
+        "Strength Potion",
+        "Treasure Key",
+        "Apple"         
+    ]
+    
+    ITEMCOUNT = len(potential_items)
+    
+    listChoice = [potential_weapons[random.randint(0,WEPCOUNT-1)]]
+    display_options = "0: " + listChoice[0] + ". "
+    i = 1
+    
+    while i < (options):
+        if(random.randint(0,1) == 0):
+            listChoice.append(potential_weapons[random.randint(0,WEPCOUNT-1)])
+            display_options = display_options + f"{i}: " + listChoice[i] + ". "
+            
+        else:
+            listChoice.append(potential_items[random.randint(0,ITEMCOUNT-1)])
+            display_options = display_options + f"{i}: " + listChoice[i] + ". "
+        
+        i += 1
+            
+    player_choice = input(f"Pick an item or weapon by inputting its number: {display_options}")
+    
+    if player_choice.isdigit():
+        player_choice = int(player_choice)
+    else:
+        raise ValueError("You must input a valid choice number")
+    
+    
+    
+    if 0 <= player_choice < options:
+        addition = listChoice[player_choice]
+        if addition in inventory:
+            inventory[addition] = (inventory[addition] + 1)
+        else:
+            inventory[addition] = 1
+    else:
+        raise ValueError("You must input a valid choice number")
+
 def view_weapons_and_items(inventory):
     """ Displays the weapons and items the player is currently holding
     
