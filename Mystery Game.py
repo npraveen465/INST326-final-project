@@ -298,7 +298,7 @@ def reset_endings(player_input, player, checkpoint, endings):
         print(f"Items held: {list(inventory)}")
 
     else: 
-        raise ValueError("Invalid input. Enter 1 or 2!"
+        raise ValueError("Invalid input. Enter 1 or 2!")
 
 def story_info(choice, scene): # TODO: Implement ArgParser function
     """Show the relevant story information and option scenarios
