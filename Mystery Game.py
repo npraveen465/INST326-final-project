@@ -299,3 +299,26 @@ def reset_endings(player_input, player, checkpoint, endings):
 
     else: 
         raise ValueError("Invalid input. Enter 1 or 2!"
+
+def story_info(choice, scene): # TODO: Implement ArgParser function
+    """Show the relevant story information and option scenarios
+    Args:
+        - Will take player input for which option they take as an int
+        - Will take scenario information from a dict of str lists with int keys
+    Side Effects:
+        - Show story text on the screen as a string
+        - Show scenario text on the screen as a string
+        - Call item storage and effects depending on player choice
+    Returns:
+        - Nothing
+    Exceptions:
+        - Call invalid value input exceptions when the player puts an invalid
+          choice for an option
+    """
+
+    # Error handling for invalid input
+    if (choice < 1) or (choice > len(scene)):
+        raise ValueError(f"Choice must be between 1 and {len(scene)}")
+    
+    for line in scene[choice]:
+        print(line)
